@@ -3,21 +3,41 @@
 A test app that allows users look up any recipe. 
 To achieve this, the following free api(s) were used:
 
-- [Edamam Recipe Search API](https://api.edamam.com/api/recipes/v2).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Recipe search [Edamam Recipe Search API](https://api.edamam.com/).
+- Currency exchange rate [APILAYER Exchange Rates Data API](https://apilayer.com).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requirements
+You need
+* Composer
+* PHP
+* Laravel
+* NodeJs
+* Any Database
 
-## Learning Laravel
+## Starting the Web App
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+To start the Website, clone this repository and run the following commands 
+```
+composer install
+```
+```
+npm install
+```
+```
+npm run dev or npm run build
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Connect it to a database. You can change the settings in the .env File. After that use the following command
+```
+php artisan migrate: --seed
+```
+This command will create the database and seed the currency table for the website.
+
+You can now start the project by using the command:
+```
+php artisan serve (-host <ip> -p <port>)
+```
+The host and port are optional, that why i have used ().
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
