@@ -11,7 +11,7 @@ class UpdateCurrency extends Command
      *
      * @var string
      */
-    protected $signature = 'app:update-currency';
+    protected $signature = 'update-currencies';
 
     /**
      * The console command description.
