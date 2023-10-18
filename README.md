@@ -1,6 +1,7 @@
 ## Food Inquiry Web App
 
 A test app that allows users look up any recipe. 
+Test URL: https://wh1069834.ispot.cc(https://wh1069834.ispot.cc)
 To achieve this, the following free api(s) were used:
 
 - Recipe search [Edamam Recipe Search API](https://api.edamam.com/).
@@ -35,10 +36,8 @@ This command will create the database and seed the currency table for the websit
 
 You can now start the project by using the command:
 ```
-php artisan serve (-host <ip> -p <port>)
+php artisan serve
 ```
-The host and port are optional, that why i have used ().
-
 
 To automatically update the currency rates hourly, you're required to setup a cron job to perform the task. Optionally, you can call the following command from your command-line to update the exchange rate.
 ```
