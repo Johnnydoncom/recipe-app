@@ -37,7 +37,7 @@ new class extends Component
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
     >{{ __('Delete Account') }}</x-danger-button>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
+    <x-popup name="confirm-user-deletion" maxWidth="sm" :show="$errors->isNotEmpty()" focusable>
         <form wire:submit="deleteUser" class="p-6">
 
             <h2 class="text-lg font-medium text-gray-900">
@@ -49,9 +49,7 @@ new class extends Component
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
+                <x-inputs.password
                     wire:model="password"
                     id="password"
                     name="password"
@@ -59,8 +57,6 @@ new class extends Component
                     class="mt-1 block w-3/4"
                     placeholder="{{ __('Password') }}"
                 />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
@@ -68,10 +64,11 @@ new class extends Component
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ml-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
+{{--                <x-danger-button class="ml-3">--}}
+{{--                    {{ __('Delete Account') }}--}}
+{{--                </x-danger-button>--}}
+                <x-button type="submit" class="ml-3" red :label="__('Delete Account')" />
             </div>
         </form>
-    </x-modal>
+    </x-popup>
 </section>

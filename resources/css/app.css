@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+@layer components {
+    .container {
+        @apply max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-4 lg:px-6;
+    }
+
+    .btn{
+        @apply inline-flex items-center uppercase justify-center text-center shrink-0 focus:ring-0 font-semibold rounded-full text-sm p-1.5 focus:outline-none;
+    }
+    .btn:where(:not(.btn-circle)){
+        @apply px-10 py-2;
+    }
+
+    .btn-primary {
+        @apply text-white bg-primary hover:bg-primary-800 focus:ring-primary-300 focus:outline-none;
+    }
+}

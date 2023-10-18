@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Artisan::call('currency:manage add ngn,usd');
+        Artisan::call('app:update-currency');
+        currency()->update(env('DEFAULT_CURRENCY'), [
+            'exchange_rate' => 1
+        ]);
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

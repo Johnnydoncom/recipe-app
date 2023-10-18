@@ -8,22 +8,20 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     public string $name = '';
-
     public string $email = '';
-
     public string $password = '';
-
-    public string $password_confirmation = '';
+    public string $phone = '';
 
     public function register(): void
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', Rules\Password::defaults()],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -36,53 +34,46 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+<x-auth-card>
+    <div class="text-center space-y-2 mb-5">
+        <h2 class="font-semibold text-2xl 2xl:text-3xl text-center">Create Account</h2>
+        <p class="text-gray-600 text-sm sm:text-lg">Create your account for free.</p>
+
+    </div>
     <form wire:submit="register">
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input :label="__('Name')" wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input :label="__('Email Address')" wire:model="email" id="email" type="email" name="email" required autocomplete="username" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mt-4">
+            <x-inputs.phone :label="__('Phone Number')" wire:model="phone" id="phone" required />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-inputs.password :label="__('Password')" wire:model="password" id="password" type="password" name="password" required autocomplete="new-password" />
         </div>
 
-        <!-- Confirm Password -->
+
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
+            <x-button class="w-full" type="submit" spinner="register" primary>
                 {{ __('Register') }}
-            </x-primary-button>
+            </x-button>
+
+            <p class="text-center py-5">
+                Already have an account?
+                <a class="underline text-primary" href="{{ route('login') }}" wire:navigate>
+                    {{ __('Sign In') }}
+                </a>
+            </p>
+
         </div>
     </form>
-</div>
+</x-auth-card>

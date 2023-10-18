@@ -8,13 +8,14 @@ use Livewire\Volt\Component;
 new class extends Component
 {
     public string $name = '';
-
     public string $email = '';
+    public string $phone = '';
 
     public function mount(): void
     {
         $this->name = auth()->user()->name;
         $this->email = auth()->user()->email;
+        $this->phone = auth()->user()->phone;
     }
 
     public function updateProfileInformation(): void
@@ -23,6 +24,7 @@ new class extends Component
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -68,15 +70,11 @@ new class extends Component
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input :label="__('Name')" wire:model="name" id="name" name="name" type="text" class="" required autofocus autocomplete="name" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <x-input :label="__('Email Address')" wire:model="email" id="email" name="email" type="email" class="" required autocomplete="username" />
 
             @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
                 <div>
@@ -97,8 +95,12 @@ new class extends Component
             @endif
         </div>
 
+        <div>
+            <x-inputs.phone :label="__('Phone Number')" wire:model="phone" id="phone" name="phone" type="text" class="" required/>
+        </div>
+
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-button spinner="updateProfileInformation" type="submit" primary>{{ __('Save') }}</x-button>
 
             <x-action-message class="mr-3" on="profile-updated">
                 {{ __('Saved.') }}
