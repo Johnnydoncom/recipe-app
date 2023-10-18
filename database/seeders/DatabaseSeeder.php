@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Artisan::call('currency:manage add ngn,usd');
-        Artisan::call('app:update-currency');
+        Artisan::call('update-currencies');
         currency()->update(env('DEFAULT_CURRENCY'), [
             'exchange_rate' => 1
         ]);
