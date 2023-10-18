@@ -5,7 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     #[Rule(['required', 'string', 'email'])]
     public string $email = '';
@@ -33,7 +33,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+<x-auth-card>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
@@ -49,10 +49,10 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+        <div class="flex items-center mt-4">
+            <x-button type="submit" class="w-full" spinner="sendPasswordResetLink" primary>
                 {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+            </x-button>
         </div>
     </form>
-</div>
+</x-auth-card>
