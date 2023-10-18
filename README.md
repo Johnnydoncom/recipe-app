@@ -1,7 +1,9 @@
 ## Food Inquiry Web App
 
 A test app that allows users look up any recipe. 
-Test URL: https://wh1069834.ispot.cc(https://wh1069834.ispot.cc)
+
+Test URL: [https://wh1069834.ispot.cc]
+
 To achieve this, the following free api(s) were used:
 
 - Recipe search [Edamam Recipe Search API](https://api.edamam.com/).
